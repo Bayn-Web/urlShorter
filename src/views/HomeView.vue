@@ -25,7 +25,7 @@ export default {
   },
   methods:{
     async short(){
-      await axios.get('/api/get',{params:{
+      await axios.get('https://node-api-zeta.vercel.app/get',{params:{
         url: this.input
       }}).then((res)=>{
         this.newUrl=res.data.newurl
