@@ -48,7 +48,7 @@ export default {
       window.open("http://"+this.newUrl)
     },
     async postShort(){
-      await axios.post('/api/post',{
+      await axios.post('https://node-api-zeta.vercel.app/post',{
         "url": this.input,
         "newurl": this.newUrl
       }).then((res)=>{
