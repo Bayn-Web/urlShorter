@@ -24,7 +24,12 @@ export default {
     }
   },
   methods:{
-    short(){
+    async short(){
+      await axios.get('/api/get',{params:{
+        url: this.input
+      }}).then((res)=>{
+        this.newUrl=res.data.newurl
+      })
       this.$copyText(this.newUrl).then(function (e) {
         ElNotification({
           title: 'Success',
@@ -38,17 +43,12 @@ export default {
           type: 'error',
         })
         })
-      axios.get('/api/get',{params:{
-        url: this.input
-      }}).then((res)=>{
-        this.newUrl=res.data.newurl
-      })
     },
     redirct(){
       window.open("http://"+this.newUrl)
     },
-    postShort(){
-      axios.post('/api/post',{
+    async postShort(){
+      await axios.post('/api/post',{
         "url": this.input,
         "newurl": this.newUrl
       }).then((res)=>{
@@ -67,6 +67,7 @@ export default {
       const sec = Math.floor(Math.random()*color.length+1)
       console.log(`linear-gradient(to bottom right, ${color[fir]}, ${color[sec]})`);
       document.getElementsByTagName("body")[0].style.backgroundImage=`linear-gradient(to bottom right, ${color[fir]}, ${color[sec]})`
+      
     }
   }
 }
