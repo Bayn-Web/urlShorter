@@ -44,12 +44,21 @@ export default {
         })
         })
     },
-    redirct(){
-      window.open("http://"+this.newUrl)
+    async redirct(){
+      let url = "https://node-api-bayn-web.vercel.app"
+      let tempUrl = ""
+      // let url = "/api/short"
+      await axios.get(url,{params:{
+        url: this.newUrl
+      }}).then((res)=>{
+        tempUrl = res.data.realurl
+        console.log(tempUrl)
+      })
+      window.open("https://"+tempUrl)
     },
     async postShort(){
       const postUrl = 'https://node-api-zeta.vercel.app/post'
-      // const postUrl = 'http://127.0.0.1/post'
+      // const postUrl = '/api/post'
       await axios.post(postUrl,{
         "url": this.input,
         "newurl": this.newUrl
